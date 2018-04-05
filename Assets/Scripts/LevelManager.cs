@@ -6,29 +6,15 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour {
 
     public GameObject levelmanager;
-    public bool singlePlayer = false;
 
-    void Start()
+    void Update()
     {
-        levelmanager = GameObject.Find("levelManager");
-        //  If the instance is null, then we instanciate this GameObject
-        //  and set it to not be destroyed when changing scenes
-        if (levelmanager == null)
+        StatCounter stats = GameObject.Find("Stats").GetComponent<StatCounter>();
+        if (SceneManager.GetActiveScene().name.Contains("SP"))
         {
-            levelmanager = this.gameObject;
-            levelmanager.name = "levelManager";
-            DontDestroyOnLoad(levelmanager);
+            stats.singlePlayer = true;
         }
-        else
-        //if the instance is not null, then we destroy this GameObject
-        {
-            Destroy(this.gameObject);
-        }
-    }
-
-    public void isSinglePlayer(bool boolean)
-    {
-        singlePlayer = boolean;
+        else stats.singlePlayer = false;
     }
 
     public void LoadLevel(string name)
@@ -46,9 +32,9 @@ public class LevelManager : MonoBehaviour {
     public void LoadNextLevel()
     {
         StatCounter stats = GameObject.Find("Stats").GetComponent<StatCounter>();
+        stats.passedLevel();
         Debug.Log("load next level");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        stats.passedLevel();
     }
 
     //  Cuando el jugador muere
@@ -69,7 +55,7 @@ public class LevelManager : MonoBehaviour {
             {
                 GameObject.FindWithTag(playerTag).GetComponent<PlayerController1>().Respawn();
             }
-        } else if (singlePlayer)
+        } else if (stats.singlePlayer)
         {
             LoadLevel("Lose");
         }
@@ -83,19 +69,20 @@ public class LevelManager : MonoBehaviour {
         //cuando el jugador recoge un item
     public void pickedUpItem(string playerTag)
     {
+        StatCounter stats = GameObject.Find("Stats").GetComponent<StatCounter>();
+        stats.gotItem(playerTag);
         //si ya no hay items
         if (Item.itemCount <= 0)
         {
-            if (singlePlayer)
+            Debug.Log(stats.singlePlayer);
+            if (stats.singlePlayer)
             {
                 //Si es singleplayer se carga el siguiente nivel
                 LoadNextLevel();
-            }
+            } else LoadLevel("Win");
             //si es multijugador se carga win
-            else LoadLevel("Win");
         }
-        StatCounter stats = GameObject.Find("Stats").GetComponent<StatCounter>();
-        stats.gotItem(playerTag);
+
     }
     //cuando el jugador ya no quiere continuar o quiere salir
     public void returnToMenu()

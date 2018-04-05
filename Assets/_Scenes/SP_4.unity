@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 253252841}
   m_Layer: 0
   m_Name: border (1)
-  m_TagString: Untagged
+  m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -540,7 +540,7 @@ Prefab:
         type: 2}
       propertyPath: currentP2Lives
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280740642}
     - target: {fileID: 114139141405263054, guid: a00701611a79b4e4d9a972aa21239c30,
         type: 2}
       propertyPath: currentP1Points
@@ -550,7 +550,7 @@ Prefab:
         type: 2}
       propertyPath: currentP2Points
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2119591673}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a00701611a79b4e4d9a972aa21239c30, type: 2}
   m_IsPrefabParent: 0
@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 1300025678}
   m_Layer: 0
   m_Name: border
-  m_TagString: Untagged
+  m_TagString: border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StatCounter : MonoBehaviour {
+    public bool singlePlayer;
     public GameObject stats;
     public int P1lives,P2lives;
     public int initLives;
@@ -42,6 +43,10 @@ public class StatCounter : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        currentP1Lives = GameObject.Find("P1 Lives").GetComponent<Text>();
+        currentP2Lives = GameObject.Find("P2 Lives").GetComponent<Text>();
+        currentP1Points = GameObject.Find("P1 points").GetComponent<Text>();
+        currentP2Points = GameObject.Find("P2 points").GetComponent<Text>();
         currentP1Lives.text = "LIVES:" + P1lives;
         currentP1Points.text = "POINTS:" + P1score;
         currentP2Lives.text = "LIVES:" + P2lives;
@@ -75,6 +80,7 @@ public class StatCounter : MonoBehaviour {
     public void passedLevel()
     {
         P1lives = P2lives = initLives;
+
     }
 
     public int getLives(string playerTag)

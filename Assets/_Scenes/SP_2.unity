@@ -631,7 +631,7 @@ Prefab:
         type: 2}
       propertyPath: currentP2Lives
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1619335708}
     - target: {fileID: 114139141405263054, guid: a00701611a79b4e4d9a972aa21239c30,
         type: 2}
       propertyPath: currentP1Points
@@ -641,7 +641,7 @@ Prefab:
         type: 2}
       propertyPath: currentP2Points
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1023693021}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a00701611a79b4e4d9a972aa21239c30, type: 2}
   m_IsPrefabParent: 0

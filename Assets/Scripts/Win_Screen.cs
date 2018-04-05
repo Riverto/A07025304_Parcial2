@@ -11,9 +11,8 @@ public class Win_Screen : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         stats = GameObject.Find("Stats").GetComponent<StatCounter>();
-        LevelManager lm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
-        if (lm.singlePlayer)
+        if (stats.singlePlayer)
         {
             ScoreLabel.text = "You Won! \n Score: " + stats.P1score;
         } else

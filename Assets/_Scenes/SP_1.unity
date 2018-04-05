@@ -685,19 +685,19 @@ Prefab:
       objectReference: {fileID: 450868537}
     - target: {fileID: 114139141405263054, guid: a00701611a79b4e4d9a972aa21239c30,
         type: 2}
-      propertyPath: currentP2Lives
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114139141405263054, guid: a00701611a79b4e4d9a972aa21239c30,
-        type: 2}
       propertyPath: currentP1Points
       value: 
       objectReference: {fileID: 1429084853}
     - target: {fileID: 114139141405263054, guid: a00701611a79b4e4d9a972aa21239c30,
         type: 2}
+      propertyPath: currentP2Lives
+      value: 
+      objectReference: {fileID: 297613078}
+    - target: {fileID: 114139141405263054, guid: a00701611a79b4e4d9a972aa21239c30,
+        type: 2}
       propertyPath: currentP2Points
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 706253924}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a00701611a79b4e4d9a972aa21239c30, type: 2}
   m_IsPrefabParent: 0
