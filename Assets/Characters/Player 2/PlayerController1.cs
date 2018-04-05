@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController1 : MonoBehaviour {
     public LevelManager levelmanager;
 
     public float maxVel = 5f;
     public float yJumpForce = 300f;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Animator anim;
     private Vector2 jumpForce;
     private bool isJumping = false;
@@ -37,11 +37,11 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Fire1P1"))
+        if (Input.GetButtonDown("Fire1P2"))
         {
             Grab();
         }
-        float v = Input.GetAxis("HorizontalP1");
+        float v = Input.GetAxis("HorizontalP2");
         Vector2 vel = new Vector2(0, rb.velocity.y); //Mono cambia de fuerzas
 
         v *= maxVel;
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
         }
 
         //if the player jumps
-        if (Input.GetButtonDown("JumpP1"))
+        if (Input.GetButtonDown("JumpP2"))
         {
             if (!isJumping)
             {
