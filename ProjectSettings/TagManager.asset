@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Player1
   - Player2
+  - death
+  - border
+  - flip
   layers:
   - Default
   - TransparentFX

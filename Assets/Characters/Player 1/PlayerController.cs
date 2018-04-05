@@ -37,10 +37,6 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Fire1P1"))
-        {
-            Grab();
-        }
         float v = Input.GetAxis("HorizontalP1");
         Vector2 vel = new Vector2(0, rb.velocity.y); //Mono cambia de fuerzas
 
@@ -97,43 +93,6 @@ public class PlayerController : MonoBehaviour {
         var s = transform.localScale;
         s.x *= -1;
         transform.localScale = s;
-    }
-
-    private void Grab()
-    {
-        if (!holdingItem)
-        {
-            if (itemReachable)
-            {
-                holdingItem = true;
-                DestroyObject(item);
-            }
-        }
-    }
-
-    void On(Collision2D collision)
-    {
-        if (collision.collider.tag == "Item")
-        {
-            itemReachable = true;
-            item = collision.collider.gameObject;
-        }
-        else
-        {
-            itemReachable = false;
-        }
-        if (collision.collider.tag == "Drop Zone")
-        {
-            inDropZone = false;
-        }
-    }
-
-    private void Drop()
-    {
-        if (inDropZone)
-        {
-            levelmanager.droppedItem(tag);
-        }
     }
 
     public void Respawn()

@@ -5,11 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
+    public GameObject levelmanager;
+    public bool singlePlayer = false;
+
+    void Start()
+    {
+        levelmanager = GameObject.Find("levelManager");
+        //  If the instance is null, then we instanciate this GameObject
+        //  and set it to not be destroyed when changing scenes
+        if (levelmanager == null)
+        {
+            levelmanager = this.gameObject;
+            levelmanager.name = "levelManager";
+            DontDestroyOnLoad(levelmanager);
+        }
+        else
+        //if the instance is not null, then we destroy this GameObject
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void isSinglePlayer(bool boolean)
+    {
+        singlePlayer = boolean;
+    }
+
     public void LoadLevel(string name)
     {
-        //Debug.Log ("New Level load: " + name);
-        //  Load the scene requested
-        //	Application.LoadLevel (name);    -- This method was deprecated a long time ago
         SceneManager.LoadScene(name);
     }
 
@@ -19,7 +42,7 @@ public class LevelManager : MonoBehaviour {
         Application.Quit();
     }
 
-    //  We added these functions to our previous LevelManager script.
+    //  We added these functions from our previous LevelManager script.
     public void LoadNextLevel()
     {
         StatCounter stats = GameObject.Find("Stats").GetComponent<StatCounter>();
@@ -35,50 +58,42 @@ public class LevelManager : MonoBehaviour {
         StatCounter stats = GameObject.Find("Stats").GetComponent<StatCounter>();
         //y llamamos el metodo LostLife
         stats.LostLife(playerTag);
-        //si el jugador aun tiene vidas
-
-        if (stats.getLives(playerTag)>0)
+        
+        if (stats.getLives(playerTag) > 0)
         {
-            if (playerTag == "Player1")
+            if (playerTag == "Player1")//lo reaparecemos
             {
                 GameObject.FindWithTag(playerTag).GetComponent<PlayerController>().Respawn();
             }
-            else if (playerTag == "Player2")
+            else if (playerTag == "Player2")//lo reaparecemos
             {
                 GameObject.FindWithTag(playerTag).GetComponent<PlayerController1>().Respawn();
             }
-        }
-        else //si ya no tiene vidas restantes
+        } else if (singlePlayer)
         {
-            //cargamos la escena de perdida
-            LoadLevel("lose");
+            LoadLevel("Lose");
         }
-    }
-    /*
-    //cuando el jugador llega a una puerta
-    public void playerReachedDoor()
-    {
-        //buscamos el objeto stats
-        StatCounter stats = GameObject.Find("Stats").GetComponent<StatCounter>();
-        //llamamos el metodo reachedDoor
-        stats.reachedDoor();
-        //y cargamos el siguiente nivel
-        LoadNextLevel();
+        else
+        {
+            LoadLevel("Win");
+        }
+        
     }
 
-    //cuando el jugador llega a la cima
-    public void playerReachedTop()
+        //cuando el jugador recoge un item
+    public void pickedUpItem(string playerTag)
     {
-        //buscamos el objeto stats
-        StatCounter stats = GameObject.Find("Stats").GetComponent<StatCounter>();
-        //lamamos el metodo reachedTop
-        stats.reachedTop();
-        //y cargamos la escena de ganar
-        LoadLevel("Win");
-    }
-    */
-    public void droppedItem(string playerTag)
-    {
+        //si ya no hay items
+        if (Item.itemCount <= 0)
+        {
+            if (singlePlayer)
+            {
+                //Si es singleplayer se carga el siguiente nivel
+                LoadNextLevel();
+            }
+            //si es multijugador se carga win
+            else LoadLevel("Win");
+        }
         StatCounter stats = GameObject.Find("Stats").GetComponent<StatCounter>();
         stats.gotItem(playerTag);
     }
@@ -90,6 +105,6 @@ public class LevelManager : MonoBehaviour {
         //lamamos el metodo restart
         stats.restart();
         //y cargamos la escena Start
-        LoadLevel("Start");
+        LoadLevel("Menu");
     }
 }

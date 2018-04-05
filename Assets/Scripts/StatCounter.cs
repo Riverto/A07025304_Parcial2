@@ -11,14 +11,15 @@ public class StatCounter : MonoBehaviour {
     public int startPoints;
     public int P1score,P2score;
     public int HighScore;
-    private int clears;
     public Text currentP1Lives;
     public Text currentP2Lives;
     public Text currentP1Points;
+    public Text currentP2Points;
+    
     // Use this for initialization
     void Start () {
+
         P1lives = P2lives = initLives;
-        clears = 0;
         P2score = P1score = 0;
         points = 0;
         HighScore = 0;
@@ -38,12 +39,13 @@ public class StatCounter : MonoBehaviour {
         }
         Update();
     }
-	
+
 	// Update is called once per frame
 	void Update () {
         currentP1Lives.text = "LIVES:" + P1lives;
+        currentP1Points.text = "POINTS:" + P1score;
         currentP2Lives.text = "LIVES:" + P2lives;
-        //currentP1Points.text = "POINTS:" + P1score;
+        currentP2Points.text = "POINTS:" + P2score;
     }
 
     //Al perder una vida
